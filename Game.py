@@ -97,7 +97,7 @@ while True:
                 change_to = 'LEFT'
             if event.key == pygame.K_RIGHT:
                 change_to = 'RIGHT'
-                
+
             # Esc -> Create event to quit the game
             if event.key == pygame.K_ESCAPE:
                 pygame.event.post(pygame.event.Event(pygame.QUIT))
@@ -126,7 +126,7 @@ while True:
     # Snake body growing mechanism
     snake_body.insert(0, list(snake_pos))
     if snake_pos[0] == food_pos[0] and snake_pos[1] == food_pos[1]:
-        score += 1
+        score += 5
         food_spawn = False
     else:
         snake_body.pop()
@@ -142,10 +142,10 @@ while True:
         # Snake body
         # .draw.rect(play_surface, color, xy-coordinate)
         # xy-coordinate -> .Rect(x, y, size_x, size_y)
-        pygame.draw.rect(game_window, green, pygame.Rect(pos[0], pos[1], 10, 10))
+        pygame.draw.rect(game_window, red, pygame.Rect(pos[0], pos[1], 15, 15))
 
     # Snake food
-    pygame.draw.rect(game_window, white, pygame.Rect(food_pos[0], food_pos[1], 10, 10))
+    pygame.draw.rect(game_window, green, pygame.Rect(food_pos[0], food_pos[1], 10, 10))
 
     # Game Over conditions
     # Getting out of bounds
