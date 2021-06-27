@@ -1,36 +1,27 @@
 """
-Snake Eater
+Snake Game
 Made with PyGame
+Made by Akash Jaiswal & Basu Krishna
+Roll no  10310007 & 103120023
+CSIR12 Project
 """
 
 import pygame, sys, time, random
 
 
 # Difficulty settings
-# Easy      ->  10
-# Medium    ->  25
-# Hard      ->  40
-# Harder    ->  60
-# Impossible->  120
-difficulty = 20
+difficulty = 30
 
 # Window size
-frame_size_x = 720
-frame_size_y = 480
+frame_size_x = 1440
+frame_size_y = 900
 
 # Checks for errors encountered
 check_errors = pygame.init()
-# pygame.init() example output -> (6, 0)
-# second number in tuple gives number of errors
-if check_errors[1] > 0:
-    print(f'[!] Had {check_errors[1]} errors when initialising game, exiting...')
-    sys.exit(-1)
-else:
-    print('[+] Game successfully initialised')
 
 
 # Initialise game window
-pygame.display.set_caption('Snake Eater')
+pygame.display.set_caption('Snake Game by Akash Jaiswal & Basu Krishna')
 game_window = pygame.display.set_mode((frame_size_x, frame_size_y))
 
 
@@ -43,7 +34,7 @@ blue = pygame.Color(0, 0, 255)
 
 
 # FPS (frames per second) controller
-fps_controller = pygame.time.Clock()
+clock = pygame.time.Clock()
 
 
 # Game variables
@@ -69,7 +60,8 @@ def game_over():
     game_window.blit(game_over_surface, game_over_rect)
     show_score(0, red, 'times', 20)
     pygame.display.flip()
-    time.sleep(3)
+
+    time.sleep(2)
     pygame.quit()
     sys.exit()
 
@@ -93,17 +85,19 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
+
         # Whenever a key is pressed down
         elif event.type == pygame.KEYDOWN:
-            # W -> Up; S -> Down; A -> Left; D -> Right
-            if event.key == pygame.K_UP or event.key == ord('w'):
+            # Up; Down; Left; Right
+            if event.key == pygame.K_UP:
                 change_to = 'UP'
-            if event.key == pygame.K_DOWN or event.key == ord('s'):
+            if event.key == pygame.K_DOWN:
                 change_to = 'DOWN'
-            if event.key == pygame.K_LEFT or event.key == ord('a'):
+            if event.key == pygame.K_LEFT:
                 change_to = 'LEFT'
-            if event.key == pygame.K_RIGHT or event.key == ord('d'):
+            if event.key == pygame.K_RIGHT:
                 change_to = 'RIGHT'
+                
             # Esc -> Create event to quit the game
             if event.key == pygame.K_ESCAPE:
                 pygame.event.post(pygame.event.Event(pygame.QUIT))
@@ -119,6 +113,7 @@ while True:
         direction = 'RIGHT'
 
     # Moving the snake
+    # snake_pos[0] = x coordinate & snake_pos[1] = y coordinate
     if direction == 'UP':
         snake_pos[1] -= 10
     if direction == 'DOWN':
@@ -164,7 +159,9 @@ while True:
             game_over()
 
     show_score(1, white, 'consolas', 20)
+
     # Refresh game screen
     pygame.display.update()
+
     # Refresh rate
-    fps_controller.tick(difficulty)
+    clock.tick(difficulty)
