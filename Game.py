@@ -7,7 +7,13 @@ CSIR12 Project
 """
 
 import pygame, sys, time, random
+from pygame import mixer
 
+#Music
+mixer.init()
+mixer.music.load("bg.ogg")
+mixer.music.set_volume(0.5)
+mixer.music.play()
 
 # Difficulty settings
 difficulty = 30
@@ -58,7 +64,7 @@ def game_over():
     game_over_rect.midtop = (frame_size_x/2, frame_size_y/4)
     game_window.fill(black)
     game_window.blit(game_over_surface, game_over_rect)
-    show_score(0, red, 'times', 20)
+    show_score(0, red, 'times', 60)
     pygame.display.flip()
 
     time.sleep(2)
@@ -142,7 +148,7 @@ while True:
         # Snake body
         # .draw.rect(play_surface, color, xy-coordinate)
         # xy-coordinate -> .Rect(x, y, size_x, size_y)
-        pygame.draw.rect(game_window, red, pygame.Rect(pos[0], pos[1], 15, 15))
+        pygame.draw.rect(game_window, red, pygame.Rect(pos[0], pos[1], 10, 10))
 
     # Snake food
     pygame.draw.rect(game_window, green, pygame.Rect(food_pos[0], food_pos[1], 10, 10))
